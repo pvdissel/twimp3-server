@@ -1,0 +1,31 @@
+apply from: script('requireJavaVersion7')
+apply from: script('dependencies')
+apply plugin: 'groovy'
+apply plugin: 'application'
+
+applicationName = 'twimp3-server'
+description = 'twimp3-server'
+mainClassName = 'twimp3.Main'
+version = '0.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile libraries.dropwizard
+    compile libraries.groovy
+    compile libraries.groovyJson
+    compile libraries.jodaTime
+
+    testCompile libraries.spock
+    testCompile libraries.dropwizardTesting
+}
+
+run {
+    args 'server'
+}
+
+File script(String name) {
+    project.file("gradle/${name}.gradle")
+}
